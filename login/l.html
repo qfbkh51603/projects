@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+	<style>
+		*{margin: 0;padding: 0}
+		li{
+			list-style: none;
+		}
+		#login{ width: 1080px;margin: 0 auto; padding: 110px 0;}
+		.login-main{ padding: 50px 35px; width:300px; float: right;border: 1px solid #ececec;border-top: 2px solid #ff4965; color: #666;}
+		#login img{ float: left;}
+		.login-main .login-title{color: #000; font-weight: 900;margin-bottom: 30px;}
+		.login-main .login-title span{ float: right;font-weight: 100;color: #666;}
+		.login-main .login-title span a{ color: #f00;}
+
+		.input-box{ margin-top: 15px; border: 1px solid #ececec; line-height: 30px; position: relative;}
+		.input-box input,.msg-ipt-l input,.check-ipt-l input{height: 30px;font-size: 12px;width: 248px;color: #666;line-height: 30px;border: 0;padding: 0 10px; float: left;}
+		.input-box .input-user{ display: block;width: 14px;height: 14px; background: url(../img/upload_c8f6a2dfe4ca17b3941740e88373a88e_14x93.jpg) 0 0 no-repeat; float: left;margin: 8px 0 0 8px;border-right: 1px solid #e6e6e6;padding-right: 7px;}
+		.input-box .input-lock{ display: block;width: 14px;height: 14px; background: url(../img/upload_c8f6a2dfe4ca17b3941740e88373a88e_14x93.jpg) 0 -47px no-repeat;float: left;margin: 8px 0 0 8px;border-right: 1px solid #e6e6e6;padding-right: 7px;}
+
+		.check-box{  margin-top: 15px;  line-height: 30px;} 
+		.check-box a{ color: red; float: right;}
+
+		.btn-login{margin-top: 15px;  line-height: 30px; text-align: center; background:red;}
+		.btn-login a{ color: #fff; width: 100%; display: block;}
+		.fast-login{margin-top: 15px;  line-height: 30px;}
+		.fast-login span{ float: left;}
+		.fast-login a{ display: block; float: left;  width: 25px; height: 25px; margin-left:10px ;}
+		.fast-login a.qq{background: url(../img/fast-login.png) -1px 0;}
+		.fast-login a.qq:hover{ background: url(../img/fast-login.png) -29px 0;}
+		.fast-login a.tb{background: url(../img/fast-login.png) -59px 0;}
+		.fast-login a.tb:hover{background: url(../img/fast-login.png) -89px 0;}
+		.fast-login a.wx{background: url(../img/fast-login.png) -119px 0;}
+		.fast-login a.wx:hover{background: url(../img/fast-login.png) -149px 0;}
+
+
+
+	</style>
+</head>
+<body>
+	<div id="login" class="clear">
+				<img src="../img/09751803412737_500x354.png">
+				<div class="login-main">
+					<div class="login-title">
+						<span> 还没账号？<a href="r.html">立即注册</a></span>
+						登录贝贝
+					</div>
+					<div class="input-box clear">
+						<span class="input-user"></span><input type="text" placeholder="您的手机号 / 邮箱"  id="username" name="username" />
+					</div>
+					<div class="input-box clear">
+						<span class="input-lock"></span><input type="password" placeholder="密码"  id="password" name="password" />
+					</div>
+					<div class="check-box">
+						<input type="checkbox" name="" id="" value="自动登录" checked="checked" />自动登录
+						<a href="##">忘记密码</a>
+					</div>
+					<div class="btn-login">
+						<a href="##">登&nbsp;&nbsp;录</a>
+					</div>
+					<div class="fast-login">
+						<span>快捷登录方式：</span>
+						<a class="qq" href="##"></a>
+						<a class="tb" href="##"></a>
+						<a class="wx" href="##"></a>
+					</div>
+				</div>
+			</div>
+
+
+			<script src="jquery.js"></script>
+			<script src="jquery.cookie.js"></script>
+			<script>
+				var user = $.cookie("user")?$.cookie("user"):"{}";
+						var href = $.cookie("href")?$.cookie("href"):"";
+						var userStr = JSON.parse(user)
+						var userName = userStr.username;
+						$(".btn-login a").click(function(){
+							var name = $("#username").val();
+							if(name == userName){
+								$.cookie("login","true",{expires:7,path:'/'});
+								alert("登录成功！");	
+								var href = location.href;
+								var start = href.lastIndexOf("?")+1;
+								if(start !=0 ){
+									var toHref = href.substr(start)
+									location.href = toHref;				
+								}	
+								else
+									location.href = "index.html";
+								
+							}
+							else
+								alert("账号或密码错误！");
+						});
+
+
+
+						$(".login-title a").click(function(event){
+									event.preventDefault();
+									var href = location.href;
+									var start = href.lastIndexOf("?")+1;
+									if(start !=0 ){
+										var toHref = href.substr(start)
+										location.href = "r.html?"+toHref;				
+									}	
+									else
+										location.href = "r.html";
+								})
+			</script>
+</body>
+</html>

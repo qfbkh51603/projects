@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0}
+		li{
+			list-style: none;
+		}
+		a:hover{text-decoration: none;}
+		/*header*/
+		#header{}
+		#header .top-nav {height: 28px;background: #f4f4f4; border-bottom: 1px #e8e8e8 solid;}
+		#header .top-nav .ulbox { width: 1080px; margin: 0 auto;position: relative;height: 28px;}
+		#header .top-nav ul {position: absolute; top:0;right:0;}
+		#header .top-nav ul li { float: left; line-height: 28px;color: #555; margin: 0 12px;height:28px; text-align: center; color: #555;}
+		#header .top-nav ul li a{ color: #555;}
+		#header .top-nav ul li.content{ width:94px; position: relative;z-index: 1;}
+		#header .top-nav ul li.content div {display: block; position: absolute; top:22px; left: 1px; border: 1px solid #ddd; width: 92px; border-top: 0; z-index: 10; background: #fff; text-align: left; text-indent: 3px; display: none;}
+		#header .top-nav ul li.content:hover a{background: #fff; border: 1px solid #ddd; padding: 5px;  border-bottom: 0;}
+		#header .top-nav ul li.content:hover div{ display: block;}
+		#header .top-nav ul li.content i{color: #FF5482;}
+		#header .top-nav ul li.content span i { color: #555;}
+		#header .top-nav ul li.dropdown:hover div{display: block;}
+		#header .top-nav ul li.dropdown{ width: 58px; }
+		#header .top-nav ul li.dropdown:hover a.dropdown-a{ border: 1px solid #ddd;background: #fff; z-index: 11; padding:3px 5px; border-bottom: 0; position: relative;}
+		#header .top-nav ul li.dropdown div{width: 220px; position: absolute; top: 22px; left: -80px; padding:10px; background: #fff; z-index: 10; border: 1px solid #ddd; display: none;}
+		#header .top-nav ul li.dropdown .wechat{float: left; width: 135px; text-align: center; color: #666; border-right: 1px dotted #CDCBCE; padding: 5px; }
+		#header .top-nav ul li.dropdown .social{ width: 30px; vertical-align: top; display: inline-block; }
+		#header .top-nav ul li.dropdown .social dd{ margin-top: 10px;}
+		#header .top-nav ul li a:hover{text-decoration: underline;}
+		#header .top-nav ul li.register a {color: #f00;}
+		#header .top-nav ul li.seg{ margin: 7px 0; height: 15px; width: 1px; background: #ddd;}
+	</style>
+</head>
+<body>
+<div id="header">
+		<div class="top-nav clear">
+			<div class="ulbox">
+				<ul>
+					<li class="login">您好， 请<a href="l.html" >登录</a></li>
+					<li class="seg"></li>
+					<li class="register"><a href="r.html" >免费注册</a></li>
+					<li class="seg"></li>
+					<li><a href="##">商家中心</a></li>
+					<li class="seg"></li>
+					<li class="content">
+						<a href="##">
+							<i class="glyphicon glyphicon-user"></i>
+							联系客服
+							<span>
+								<i class="glyphicon glyphicon-chevron-down"></i>
+							</span>
+						</a>
+						<div>
+							<i class="glyphicon glyphicon-question-sign"></i>
+							帮助中心
+						</div>
+					</li>
+					<li class="seg"></li>
+					<li class="dropdown">
+						<a class="dropdown-a" href="##">
+							关注
+							<i class="glyphicon glyphicon-chevron-down"></i>
+						</a>
+						
+						<div>
+							<dl class="wechat">
+								<dd>微信号：beibeiclub</dd>
+								<dt><img src="../img/40450807220001_158x158.jpg"  width="70" height="70"/></dt>
+								<dd>订阅贝贝官方微信</dd>
+							</dl>
+							<!--<dl class="social">
+	                            <dd><a target="_blank" c-bname="关注新浪微博" clog="" c-emit="click" c-et="event" c-etl="" href="http://weibo.com/p/1006063963155532/home?from=page_100606&amp;mod=TAB#place" title="关注贝贝新浪微博"><img src="../img/weibo_45x45.png" alt="关注贝贝新浪微博" width="45" height="45"></a></dd>
+	                            <dd><a target="_blank" c-bname="关注QQ空间" clog="" c-emit="click" c-et="event" c-etl="" href="http://user.qzone.qq.com/2643291899?ptsig=xhap*Fevow5d8Z6q4BQELbvQeVmB17*Jlr6GDifDLTE" title="关注贝贝QQ空间"><img src="../img/qzone_45x45.png" alt="关注贝贝QQ空间" width="45" height="45"></a></dd>
+	                        </dl>-->
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+</div>
+
+<script src="jquery.js"></script>
+<script src="jquery.cookie.js"></script>
+<script>
+	//保存登录前网址
+		$(".login a").click(function(event){
+			event.preventDefault();
+			var href = location.href;
+			var start = href.lastIndexOf("/")+1;
+			var toHref = href.substr(start)
+			location.href = "l.html?"+toHref;
+		})
+		//保存注册前网址
+		$(".register a").click(function(event){
+			event.preventDefault();
+			var href = location.href;
+			var start = href.lastIndexOf("/")+1;
+			var toHref = href.substr(start)
+			location.href = "r.html?"+toHref;
+		})
+	//判断是否登录	
+		var isLogin = $.cookie("login")? $.cookie("login"):"";	
+//		console.log($.cookie("login"))
+//		console.log(isLogin)
+		if(isLogin){
+			alert(1)
+			var user =  $.cookie('user') ? $.cookie('user'):"{}";
+			var userStr = JSON.parse(user);
+			 $("li.login").html("<i class='glyphicon glyphicon-user'></i>"+ userStr.username);
+			 $('li.login i').css("color","#088100");
+			 $("li.login").css("color","#f00");
+			 $("li.register").html("<a href='#' style='color:#555' >[退出]</a>");
+		}
+			 //退出
+			 $("li.register a").click(function(){
+			 	$.cookie("login","",{expires:-1,path:'/'});
+			 	$.cookie("carts","",{expires:-1,path:'/'});	
+			 	
+			 	location.reload();
+		 	 })
+			 
+</script>
+</body>
+</html>
